@@ -1,0 +1,1 @@
+testFrameworks := Seq(new TestFramework("utest.runner.Framework"))

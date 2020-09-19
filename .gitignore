@@ -1,0 +1,6 @@
+.idea/*
+target/*
+bot/target/*
+worker/target/*
+project/target/*
+commons/target/*

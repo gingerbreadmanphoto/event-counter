@@ -1,0 +1,75 @@
+version: '3'
+
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
+  kafka:
+    image: 'bitnami/kafka:latest'
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+    depends_on:
+      - zookeeper
+
+  bot:
+    image: 'gingerdocker/bot:interview'
+    environment:
+      - WORKER_HOSTS=http://worker-1:8090,http://worker-2:8090,http://worker-3:8090,http://worker-1-replica:8090,http://worker-2-replica:8090,http://worker-3-replica:8090
+    depends_on:
+      - worker-1
+      - worker-2
+      - worker-3
+      - worker-1-replica
+      - worker-2-replica
+      - worker-3-replica
+
+  worker-1:
+    image: 'gingerdocker/worker:interview'
+    environment:
+      - NODE_INDEX=0
+      - NODES_COUNT=3
+    depends_on:
+      - kafka
+
+  worker-1-replica:
+    image: 'gingerdocker/worker:interview'
+    environment:
+      - NODE_INDEX=0
+      - NODES_COUNT=3
+    depends_on:
+      - kafka
+
+  worker-2:
+    image: 'gingerdocker/worker:interview'
+    environment:
+      - NODE_INDEX=1
+      - NODES_COUNT=3
+    depends_on:
+      - kafka
+
+  worker-2-replica:
+     image: 'gingerdocker/worker:interview'
+     environment:
+       - NODE_INDEX=1
+       - NODES_COUNT=3
+     depends_on:
+       - kafka
+
+  worker-3:
+    image: 'gingerdocker/worker:interview'
+    environment:
+      - NODE_INDEX=2
+      - NODES_COUNT=3
+    depends_on:
+      - kafka
+
+  worker-3-replica:
+    image: 'gingerdocker/worker:interview'
+    environment:
+      - NODE_INDEX=2
+      - NODES_COUNT=3
+    depends_on:
+      - kafka
