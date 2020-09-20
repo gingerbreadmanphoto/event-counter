@@ -38,7 +38,7 @@ val worker = (project in file("worker"))
   )
   .configs(IntegrationTest)
   .withDocker(exposedPorts = Seq(8090))
-  .dependsOn(commons % "compile->compile,test->test,it->it")
+  .dependsOn(commons)
 
 val bot = (project in file("bot"))
   .settings(
@@ -51,4 +51,4 @@ val bot = (project in file("bot"))
     ),
   )
   .withDocker()
-  .dependsOn(commons % "compile->compile,test->test,it->it")
+  .dependsOn(commons)

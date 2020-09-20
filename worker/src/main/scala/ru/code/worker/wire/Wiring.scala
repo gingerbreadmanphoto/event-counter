@@ -81,7 +81,6 @@ object Wiring {
         val server              = BlazeServerBuilder[F]
             .bindHttp(config.httpPort, config.httpHost)
             .withHttpApp(httpRoute)
-            .withDefaultSocketReuseAddress
             .withExecutionContext(executionContext)
             .serve
 
