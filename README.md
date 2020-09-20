@@ -1,7 +1,7 @@
 # event-counter
-<br>
-Application reads kafka topic events and count them using **Linear probabilistic counter**.
-<br>
+
+Application reads kafka topic events and count them using **Linear probabilistic counter**.  
+
 1) `cd deploy`<br>
 2) `docker-compose up`<br>
 3) Add telegram bot `@dasdhafhakfabot`<br>
