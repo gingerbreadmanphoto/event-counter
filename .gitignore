@@ -3,5 +3,6 @@ target/*
 bot/target/*
 worker/target/*
 project/target/*
+project/project/target/*
 commons/target/*
 .DS_Store
