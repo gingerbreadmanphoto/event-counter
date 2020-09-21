@@ -4,3 +4,4 @@ bot/target/*
 worker/target/*
 project/target/*
 commons/target/*
+.DS_Store
